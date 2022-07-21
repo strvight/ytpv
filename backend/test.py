@@ -31,4 +31,4 @@ print(name[-3:])
 # print('Your UUID is: ' + str(myuuid))
 # print(myuuid)
 
-# getSongInfo("https://www.youtube.com/watch?v=nkz0M4TS7oA")
+getSongInfo("https://www.youtube.com/watch?v=nkz0M4TS7oA")
