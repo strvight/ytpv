@@ -4,20 +4,18 @@ import queryService from './services/query'
 import axios from 'axios'
 import loadingGif from './Circles-menu-3.gif'
 import './App.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUpload } from '@fortawesome/free-solid-svg-icons'
 const { v4: uuidv4 } = require('uuid')
 
 const App = () => {
 
   const [search, setSearch] = useState('')
-
-  // React state to track order of items
   const [songList, setSongList] = useState([]);
-
   const [bgImage, setBgImage] = useState(null)
-
   const [finalID, setFinalID] = useState('')
-
   const [loading, setLoading] = useState(false)
+  const [songLoading, setSongLoading] = useState(false)
 
   // Function to update list on drop
   const handleDrop = (droppedItem) => {
@@ -52,11 +50,14 @@ const App = () => {
       return
     }
 
+    setSongLoading(true)
+
     queryService.getInfo({ query: search }).then(info => {
       console.log(info)
       const newList = songList.concat(info)
       setSongList(newList)
       setSearch('')
+      setSongLoading(false)
     })
     //alert(search)
   }
@@ -97,7 +98,23 @@ const App = () => {
   if (loading) {
     return (
       <div>
-        <img src={loadingGif} alt="wait until the page loads" />
+        <div className='home-header'>
+          <h1><span className='sky-400'>yt</span>pv</h1>
+          <h3>youtube playlist video maker</h3>
+        </div>
+        <div className='instructions'>
+            <ol>
+              <li>paste youtube link and press add</li>
+              <li>edit song title and artist</li>
+              <li>drag and drop to get order of songs</li>
+              <li>choose video background image</li>
+              <li>create and wait for download</li>
+            </ol>
+        </div>
+        <div className='loading'>
+          <img src={loadingGif} alt="wait until the page loads" />
+          <h2>Creating video, please wait (may take a while)</h2>
+        </div>
       </div>
     )
   }
@@ -116,13 +133,18 @@ const App = () => {
             <li>choose video background image</li>
             <li>create and wait for download</li>
           </ol>
-        </div>
+      </div>
       <div className='search-form'>
         <form onSubmit={handleAdd}>
           <input placeholder='Youtube Link' type='text' onChange={(event) => setSearch(event.target.value)} value={search}></input>
-          <button type='submit'>Add</button>
+          { songLoading ? "Loading song ..." : <button type='submit'>Add</button> }
         </form>
       </div>
+      <div className='download'>
+        <p>Your video is done! Download by clicking the button below.</p>
+        {finalID && <a href={"http://localhost:5000/video/".concat(finalID)} target="blank"><button>Download video</button></a>}
+      </div>
+
       <div className='list'>
         <DragDropContext onDragEnd={handleDrop}>
         <Droppable droppableId="list-container">
@@ -141,7 +163,10 @@ const App = () => {
                       {...provided.dragHandleProps}
                       {...provided.draggableProps}
                     >
-                      {item.title} by {item.artist} 
+                      <div className='song-info'>
+                        <img src={item.thumbnail} alt='video thumbnail'></img>
+                        {index + 1}. {item.title} by {item.artist} 
+                      </div>
                       <ListItem handleItemChange={handleItemChange} item={item} index={index}></ListItem>
                       {/* <input value={item} type='text' onChange={event => handleItemChange(event, index)}></input> */}
                     </div>
@@ -154,10 +179,16 @@ const App = () => {
         </Droppable>
       </DragDropContext>
       </div>
-      <form onSubmit={handleCreate}>
+      
+      <form onSubmit={handleCreate} className='create-form'>
         <div>
-        <input type='file' accept='image/*' onChange={(event) => setBgImage(event.target.files[0])}></input>
+          <label className="file-upload">
+            <input type='file' accept='image/*' onChange={(event) => setBgImage(event.target.files[0])}></input>
+            <FontAwesomeIcon icon={faUpload}></FontAwesomeIcon> Upload background image
+          </label>
+          {bgImage && <p>{bgImage.name}</p>}
         </div>
+        
         <button type='submit'>Create</button>
       </form>
       {/* https://medium.com/excited-developers/file-upload-with-react-flask-e115e6f2bf99 */}
@@ -166,7 +197,6 @@ const App = () => {
          <input type = "file" name = "file" />
          <input type = "submit"/>
       </form>    */}
-      {finalID && <a href={"http://localhost:5000/video/".concat(finalID)} target="blank"><button>Download video</button></a>}
       {/* {finalID && <a href={"video/".concat(finalID)} target="blank">Download (local)</a>} */}
 
     </div>
@@ -194,17 +224,17 @@ const ListItem = ({ handleItemChange, item, index }) => {
 
   const handleEdit = (event) => {
     event.preventDefault()
-    handleItemChange(event, index, { title, artist, id: item.id, link: item.link })
+    handleItemChange(event, index, { title, artist, id: item.id, link: item.link, thumbnail: item.thumbnail })
     setEdit(false)
   }
 
   if (edit) {
     return (
       <>
-        <form onSubmit={handleEdit}>
-          <input type='text' value={title} onChange={handleTitleChange}></input>
-          <input type='text' value={artist} onChange={handleArtistChange}></input>
-          <button type='submit'>Confirm</button>
+        <form onSubmit={handleEdit} className='edit-form'>
+          title: <input type='text' value={title} onChange={handleTitleChange} className='title-input'></input>
+          artist: <input type='text' value={artist} onChange={handleArtistChange} className='artist-input'></input>
+          <button type='submit' className='edit-button'>Confirm</button>
         </form>
       </>
     )
@@ -212,7 +242,7 @@ const ListItem = ({ handleItemChange, item, index }) => {
 
   return (
     <>
-      <button onClick={() => setEdit(true)}>Edit</button>
+      <button onClick={() => setEdit(true)} className='edit-button'>Edit</button>
     </>
   )
 }
