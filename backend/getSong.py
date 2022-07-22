@@ -73,21 +73,24 @@ def getSongInfo(query):
 
     title = ''
     artist = ''
+    thumbnail = ''
 
     for item in response.json()['items']:
         searchVideoID = item['id']['videoId']
         if searchVideoID == videoID:
             title = item['snippet']['title']
             artist = item['snippet']['channelTitle']
+            thumbnail = item['snippet']['thumbnails']['default']['url']
             break
 
     info = {
         "title": title,
         "artist": artist,
         "id": videoID,
-        "link": videoLink
+        "link": videoLink,
+        "thumbnail": thumbnail
     }
 
-    print(title, artist)
+    # print(info)
 
     return info

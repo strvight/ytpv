@@ -4,25 +4,6 @@ import re
 import os
 import uuid
 
-# keepGoing = True
-
-# while keepGoing:
-#     cmd = input("1. get song (search) \n2. get song (link) \n3. make video \n")
-
-#     if cmd == "1":
-#         query = input("search string: ")
-#         getSong(query)
-#     elif cmd == "2":
-#         link = input("link: ")
-#         getSongLink(link)
-#     elif cmd == "3":
-#         keepGoing = False
-#         createVideo()
-#     else:
-#         print("unknown command")
-
-# createVideo()
-
 
 def createPlaylistVideo(videoObjects, bgFileName):
 
@@ -44,5 +25,5 @@ def createPlaylistVideo(videoObjects, bgFileName):
             getSong(videoString, userUuid)
 
     createVideo(userUuid, ids, texts, bgFileName)
+
     return userUuid
-    # return "test"

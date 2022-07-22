@@ -12,7 +12,7 @@ def createImage(text, uuid):
 
     textWidth, textHeight = imgDraw.textsize(text, font=font)
     xText = (width - textWidth) / 2
-    yText = ((height - textHeight) / 2) + 180
+    yText = ((height - textHeight) / 2) + 250
 
     imgDraw.text((xText, yText), text, font=font, fill=(255, 255, 255))
 

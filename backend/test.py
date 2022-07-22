@@ -2,6 +2,7 @@ import os
 import re
 import uuid
 from getSong import *
+from image import *
 
 name = "310dde77-aed7-44c5-8c78-850309ba8419.png"
 
@@ -31,4 +32,7 @@ print(name[-3:])
 # print('Your UUID is: ' + str(myuuid))
 # print(myuuid)
 
-getSongInfo("https://www.youtube.com/watch?v=nkz0M4TS7oA")
+# getSongInfo("https://www.youtube.com/watch?v=nkz0M4TS7oA")
+
+createImage('Counting Stars by OneRepublic',
+            '043147f4-3020-4d8b-ada5-ee2d4ad80c86')
