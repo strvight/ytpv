@@ -2,6 +2,7 @@ import subprocess
 import requests
 import os
 from dotenv import load_dotenv
+import yt_dlp
 
 load_dotenv()
 key = os.getenv('YOUTUBE_KEY')
@@ -39,13 +40,23 @@ def getSong(query, uuid):
 
 
 def getSongLink(link, uuid):
-    try:
-        subprocess.run(
-            ["yt-dlp.exe", f'-o "./audio/{uuid}/%(id)s.%(ext)s"', "-f bestaudio", link], shell=True)
-    except:
-        print("invalid link")
 
-    folder = "./ ##/audio/" + str(uuid) + "/"
+    ydl_opts = {
+        'format': 'bestaudio',
+        # ℹ️ See help(yt_dlp.postprocessor) for a list of available Postprocessors and their arguments
+        'outtmpl': f'./audio/{uuid}/%(id)s.%(ext)s'
+    }
+
+    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
+        error_code = ydl.download([link])
+
+    # try:
+    #     subprocess.run(
+    #         ["yt-dlp.exe", f'-o "./audio/{uuid}/%(id)s.%(ext)s"', "-f bestaudio", link], shell=True)
+    # except:
+    #     print("invalid link")
+
+    folder = "./audio/" + str(uuid) + "/"
 
     for file_name in os.listdir(folder):
 

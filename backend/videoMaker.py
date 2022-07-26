@@ -9,7 +9,7 @@ def createVideo(uuid, ids, texts, bgFileName):
 
     audioClips = []
 
-    folder = "./ ##/audio/" + str(uuid) + "/"
+    folder = "./audio/" + str(uuid) + "/"
 
     for idString in ids:
         source = folder + idString + ".webm"

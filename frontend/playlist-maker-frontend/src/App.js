@@ -95,6 +95,12 @@ const App = () => {
     })
   }
 
+  const handleAnother = () => {
+    setBgImage(null)
+    setFinalID('')
+    setSongList([])
+  }
+
   if (loading) {
     return (
       <div>
@@ -119,6 +125,39 @@ const App = () => {
     )
   }
 
+  if (finalID) {
+    return (
+      <div>
+        <div className='home-header'>
+          <h1><span className='sky-400'>yt</span>pv</h1>
+          <h3>youtube playlist video maker</h3>
+        </div>
+        <div className='instructions'>
+            <ol>
+              <li>paste youtube link and press add</li>
+              <li>edit song title and artist</li>
+              <li>drag and drop to get order of songs</li>
+              <li>choose video background image</li>
+              <li>create and wait for download</li>
+            </ol>
+        </div>
+        <div className='search-form'>
+          <form onSubmit={handleAdd}>
+            <input placeholder='Youtube Link' type='text' onChange={(event) => setSearch(event.target.value)} value={search}></input>
+            { songLoading ? "Loading song ..." : <button type='submit'>Add</button> }
+          </form>
+        </div>
+        <div className='download'>
+          <p>Your video is done! Download by clicking the button below.</p>
+          <a href={"/video/".concat(finalID)} target="blank"><button>Download video</button></a>
+        </div>
+        <div className='another'>
+            <button onClick={handleAnother}>Create another video</button>
+          </div>
+      </div>
+    )
+  }
+
   return (
     <div>
       <div className='home-header'>
@@ -139,10 +178,6 @@ const App = () => {
           <input placeholder='Youtube Link' type='text' onChange={(event) => setSearch(event.target.value)} value={search}></input>
           { songLoading ? "Loading song ..." : <button type='submit'>Add</button> }
         </form>
-      </div>
-      <div className='download'>
-        <p>Your video is done! Download by clicking the button below.</p>
-        {finalID && <a href={"http://localhost:5000/video/".concat(finalID)} target="blank"><button>Download video</button></a>}
       </div>
 
       <div className='list'>

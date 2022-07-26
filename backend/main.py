@@ -9,7 +9,7 @@ def createPlaylistVideo(videoObjects, bgFileName):
 
     userUuid = uuid.uuid4()
 
-    os.mkdir(f"./ ##/audio/{userUuid}")
+    os.mkdir(f"./audio/{userUuid}")
 
     videoStrings = map(lambda object: object["link"], videoObjects)
     ids = map(lambda object: object["id"], videoObjects)

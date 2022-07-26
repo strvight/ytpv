@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.17aa7c0b.css",
+    "main.js": "/static/js/main.c525a47e.js",
+    "static/media/Circles-menu-3.gif": "/static/media/Circles-menu-3.20a21d3c5d14bc614403.gif",
+    "index.html": "/index.html",
+    "main.17aa7c0b.css.map": "/static/css/main.17aa7c0b.css.map",
+    "main.c525a47e.js.map": "/static/js/main.c525a47e.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.17aa7c0b.css",
+    "static/js/main.c525a47e.js"
+  ]
+}
