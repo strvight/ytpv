@@ -1,13 +1,14 @@
-from moviepy.editor import *
-from image import *
+from moviepy.editor import AudioFileClip, concatenate_audioclips, ImageSequenceClip
+from image import createImage
 import os
 
 
 def createVideo(uuid, ids, texts, bgFileName):
-
     os.mkdir(f"./images/{uuid}")
 
     audioClips = []
+
+    images = []
 
     folder = "./audio/" + str(uuid) + "/"
 
@@ -20,54 +21,90 @@ def createVideo(uuid, ids, texts, bgFileName):
 
     concatAudio = concatenate_audioclips(audioClips)
 
-    image = ImageClip(f"./images/bg/{bgFileName}")
-
-    image = image.resize((1920, 1080))
-
-    totalAudioDuration = sum(map(lambda a: round(a.duration), audioClips))
-    # print(totalAudioDuration)
-
     audioDurations = list(map(lambda a: round(a.duration), audioClips))
-    # print(audioDurations)
 
-    video = image.set_audio(concatAudio)
+    print(audioDurations)
 
-    video = video.set_duration(totalAudioDuration)
+    for text in texts:
+        image = createImage(text, uuid, bgFileName)
 
-    allClips = []
+        images.append(image)
 
-    timeCounter = 0
+    clip = ImageSequenceClip(
+        f"./images/{uuid}", durations=audioDurations)
 
-    for i, text in enumerate(texts):
-        image = ImageClip(createImage(text, uuid))
-
-        if i == 0:
-            image = image.set_duration(
-                audioDurations[i]).set_position("center")
-        else:
-            image = image.set_start(
-                timeCounter + audioDurations[i-1]).set_duration(audioDurations[i]).set_position("center")
-            timeCounter = timeCounter + audioDurations[i-1]
-
-        allClips.append(image)
-
-    #print(list(map(lambda c: c.start, allClips)))
-    # print(allClips)
-
-    video.resize((1920, 1080))
-
-    allClips.insert(0, video)
-
-    # print(allClips)
-
-    finalVideo = CompositeVideoClip(allClips)
+    clip = clip.set_audio(concatAudio)
 
     os.mkdir(f"./finals/{uuid}")
 
-    finalVideo.write_videofile(
-        f"./finals/{uuid}/playlistVideo.mp4", threads=24, fps=1, logger=None)
+    clip.write_videofile(
+        f"./finals/{uuid}/playlistVideo.mp4", threads=1, fps=1)
 
-    return f"./finals/{uuid}/playlistVideo.mp4"
+# def createVideo(uuid, ids, texts, bgFileName):
+
+#     os.mkdir(f"./images/{uuid}")
+
+#     audioClips = []
+
+#     folder = "./audio/" + str(uuid) + "/"
+
+#     for idString in ids:
+#         source = folder + idString + ".webm"
+
+#         audioclip = AudioFileClip(source)
+
+#         audioClips.append(audioclip)
+
+#     concatAudio = concatenate_audioclips(audioClips)
+
+#     image = ImageClip(f"./images/bg/{bgFileName}")
+
+#     image = image.resize((1920, 1080))
+
+#     totalAudioDuration = sum(map(lambda a: round(a.duration), audioClips))
+#     # print(totalAudioDuration)
+
+#     audioDurations = list(map(lambda a: round(a.duration), audioClips))
+#     # print(audioDurations)
+
+#     video = image.set_audio(concatAudio)
+
+#     video = video.set_duration(totalAudioDuration)
+
+#     allClips = []
+
+#     timeCounter = 0
+
+#     for i, text in enumerate(texts):
+#         image = ImageClip(createImage(text, uuid))
+
+#         if i == 0:
+#             image = image.set_duration(
+#                 audioDurations[i]).set_position("center")
+#         else:
+#             image = image.set_start(
+#                 timeCounter + audioDurations[i-1]).set_duration(audioDurations[i]).set_position("center")
+#             timeCounter = timeCounter + audioDurations[i-1]
+
+#         allClips.append(image)
+
+#     #print(list(map(lambda c: c.start, allClips)))
+#     # print(allClips)
+
+#     video.resize((1920, 1080))
+
+#     allClips.insert(0, video)
+
+#     # print(allClips)
+
+#     finalVideo = CompositeVideoClip(allClips)
+
+#     os.mkdir(f"./finals/{uuid}")
+
+#     finalVideo.write_videofile(
+#         f"./finals/{uuid}/playlistVideo.mp4", threads=24, fps=1, logger=None)
+
+#     return f"./finals/{uuid}/playlistVideo.mp4"
 
 # createVideo()
 

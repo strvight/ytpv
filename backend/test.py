@@ -1,16 +1,11 @@
 import os
 import re
 import uuid
+from videoMaker import createVideoRAM
 from getSong import *
 from image import *
 from delete import *
 
-deleteFiles('fcd8ef08-d30e-4874-8e37-eb42ae8bf272',
-            'c33d5c8d-0e05-40c3-8b8d-5d407425447b.jpg')
-
-name = "310dde77-aed7-44c5-8c78-850309ba8419.png"
-
-print(name[-3:])
 
 # folder = r' ##\audio\\'
 
@@ -38,4 +33,12 @@ print(name[-3:])
 
 # getSongInfo("https://www.youtube.com/watch?v=nkz0M4TS7oA")
 
-#createImage('Counting Stars by OneRepublic','043147f4-3020-4d8b-ada5-ee2d4ad80c86')
+# getSongLink('https://www.youtube.com/watch?v=FvOpPeKSf_4', '123')
+# getSongLink('https://www.youtube.com/watch?v=pbNs7tAUFkk', '123')
+
+# createImage('Grenade - Bruno Mars', '123',
+#             '5476b958-92de-4c18-9ca1-40f3fd6b85cd.jpg')
+
+
+createVideoRAM('123', ['FvOpPeKSf_4', 'pbNs7tAUFkk'], [
+               'Glimpse of Us - Joji', 'drunk - keshi'], '39935.jpg')
