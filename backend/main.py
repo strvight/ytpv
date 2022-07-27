@@ -15,7 +15,7 @@ def createPlaylistVideo(videoObjects, bgFileName):
     videoStrings = map(lambda object: object["link"], videoObjects)
     ids = map(lambda object: object["id"], videoObjects)
     texts = map(lambda object: object["title"] +
-                " by " + object["artist"], videoObjects)
+                " - " + object["artist"], videoObjects)
 
     for videoString in videoStrings:
         isLink = re.search(
