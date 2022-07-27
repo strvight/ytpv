@@ -3,6 +3,10 @@ import re
 import uuid
 from getSong import *
 from image import *
+from delete import *
+
+deleteFiles('fcd8ef08-d30e-4874-8e37-eb42ae8bf272',
+            'c33d5c8d-0e05-40c3-8b8d-5d407425447b.jpg')
 
 name = "310dde77-aed7-44c5-8c78-850309ba8419.png"
 
@@ -13,7 +17,7 @@ print(name[-3:])
 # print(os.listdir(folder)[0][:-17])
 
 
-# for i, filename in enumerate(os.listdir('./ ##/audio/e9e1da22-f725-4c1e-96f8-567593c217c2')):
+# for i, filename in enumerate(os.listdir('./audio')):
 #     print(i, filename)
 
 # for file_name in os.listdir("./images"):
@@ -34,5 +38,4 @@ print(name[-3:])
 
 # getSongInfo("https://www.youtube.com/watch?v=nkz0M4TS7oA")
 
-createImage('Counting Stars by OneRepublic',
-            '043147f4-3020-4d8b-ada5-ee2d4ad80c86')
+#createImage('Counting Stars by OneRepublic','043147f4-3020-4d8b-ada5-ee2d4ad80c86')

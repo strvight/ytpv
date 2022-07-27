@@ -2,8 +2,9 @@ from flask import Flask, request, send_file
 from werkzeug.utils import secure_filename
 from main import *
 from getSong import getSongInfo
+import shutil
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='', static_folder='frontend/build')
 
 
 @app.route("/", methods=['GET', 'POST'])
@@ -64,3 +65,22 @@ def get_video(fileID):
         return send_file(f'./finals/{fileID}/playlistVideo.mp4', attachment_filename='playlistVideo.mp4', as_attachment=True)
     except Exception as e:
         return str(e)
+
+
+@app.route('/delete-final', methods=['POST'])
+def delete_final():
+    if request.method == 'POST':
+        print(request.json)
+        fileID = request.json['finalID']
+        try:
+            # os.remove(f'./finals/{fileID}/playlistVideo.mp4')
+            shutil.rmtree(f'./finals/{fileID}')
+            return 'file removed'
+        except Exception as e:
+            return str(e)
+
+
+if __name__ == "__main__":
+    port = os.environ.get("PORT", 5000)
+    #app.run(debug=True, host="0.0.0.0", port=port)
+    app.run(debug=True)

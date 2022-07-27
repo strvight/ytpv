@@ -50,11 +50,8 @@ def getSongLink(link, uuid):
     with yt_dlp.YoutubeDL(ydl_opts) as ydl:
         error_code = ydl.download([link])
 
-    # try:
-    #     subprocess.run(
-    #         ["yt-dlp.exe", f'-o "./audio/{uuid}/%(id)s.%(ext)s"', "-f bestaudio", link], shell=True)
-    # except:
-    #     print("invalid link")
+    if error_code:
+        print(error_code)
 
     folder = "./audio/" + str(uuid) + "/"
 
@@ -71,8 +68,6 @@ def getSongLink(link, uuid):
 
         os.rename(source, new)
 
-
-# getSongLink("om/watch?v=oBpaB2YzX8s")
 
 def getSongInfo(query):
 
@@ -101,7 +96,5 @@ def getSongInfo(query):
         "link": videoLink,
         "thumbnail": thumbnail
     }
-
-    # print(info)
 
     return info

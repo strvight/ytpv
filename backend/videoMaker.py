@@ -65,7 +65,7 @@ def createVideo(uuid, ids, texts, bgFileName):
     os.mkdir(f"./finals/{uuid}")
 
     finalVideo.write_videofile(
-        f"./finals/{uuid}/playlistVideo.mp4", threads=24, fps=1)
+        f"./finals/{uuid}/playlistVideo.mp4", threads=24, fps=1, logger=None)
 
     return f"./finals/{uuid}/playlistVideo.mp4"
 

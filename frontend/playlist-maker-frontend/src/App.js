@@ -32,8 +32,6 @@ const App = () => {
 
   const handleItemChange = (event, index, newObject) => {
     event.preventDefault()
-    console.log(index, newObject)
-    // const newItem = event.target.value
     let updatedList = [...songList]
     updatedList[index] = newObject
     console.log(updatedList)
@@ -53,13 +51,11 @@ const App = () => {
     setSongLoading(true)
 
     queryService.getInfo({ query: search }).then(info => {
-      console.log(info)
       const newList = songList.concat(info)
       setSongList(newList)
       setSearch('')
       setSongLoading(false)
     })
-    //alert(search)
   }
 
   const handleCreate = (event) => {
@@ -68,7 +64,6 @@ const App = () => {
       alert('add some songs!')
       return
     }
-    console.log('created')
     const formData = new FormData()
 
     const fileID = uuidv4()
@@ -96,9 +91,15 @@ const App = () => {
   }
 
   const handleAnother = () => {
+
+    const data = { finalID: finalID }
+
+    axios.post('/delete-final', data).then(res => console.log(res)).catch(err => console.warn(err));
+
     setBgImage(null)
     setFinalID('')
     setSongList([])
+    setSearch('')
   }
 
   if (loading) {
@@ -140,12 +141,6 @@ const App = () => {
               <li>choose video background image</li>
               <li>create and wait for download</li>
             </ol>
-        </div>
-        <div className='search-form'>
-          <form onSubmit={handleAdd}>
-            <input placeholder='Youtube Link' type='text' onChange={(event) => setSearch(event.target.value)} value={search}></input>
-            { songLoading ? "Loading song ..." : <button type='submit'>Add</button> }
-          </form>
         </div>
         <div className='download'>
           <p>Your video is done! Download by clicking the button below.</p>
@@ -200,7 +195,7 @@ const App = () => {
                     >
                       <div className='song-info'>
                         <img src={item.thumbnail} alt='video thumbnail'></img>
-                        {index + 1}. {item.title} by {item.artist} 
+                        {index + 1}. {item.title} - {item.artist} 
                       </div>
                       <ListItem handleItemChange={handleItemChange} item={item} index={index}></ListItem>
                       {/* <input value={item} type='text' onChange={event => handleItemChange(event, index)}></input> */}

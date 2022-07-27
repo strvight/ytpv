@@ -1,5 +1,6 @@
 from videoMaker import *
 from getSong import *
+from delete import *
 import re
 import os
 import uuid
@@ -25,5 +26,7 @@ def createPlaylistVideo(videoObjects, bgFileName):
             getSong(videoString, userUuid)
 
     createVideo(userUuid, ids, texts, bgFileName)
+
+    deleteFiles(userUuid, bgFileName)
 
     return userUuid
