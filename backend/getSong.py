@@ -114,7 +114,7 @@ def getPlaylistInfo(link):
     for item in items:
         info = {
             "title": item['snippet']['title'],
-            "artist": item['snippet']['channelTitle'],
+            "artist": item['snippet']['videoOwnerChannelTitle'],
             "id": item['snippet']['resourceId']['videoId'],
             "link": "https://youtu.be/" + item['snippet']['resourceId']['videoId'],
             "thumbnail": item['snippet']['thumbnails']['default']['url']

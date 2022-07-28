@@ -16,7 +16,7 @@ Check it out for yourself: https://ytpv.azurewebsites.net/ (only works with shor
 
 # How to use ytpv
 
-1. paste youtube video links into search bar
+1. paste youtube video or playlist links into search bar
 2. drap and drop cards to select order
 3. change title/artist names
 4. add video background image
