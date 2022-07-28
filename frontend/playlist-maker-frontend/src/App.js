@@ -43,19 +43,30 @@ const App = () => {
 
     const regex = /http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?/
 
-    if (!regex.test(search)) {
+    const regexPlaylist =  /^.*(youtu.be\/|list=)([^#\&\?]*).*/
+
+    if (regex.test(search)) {
+      setSongLoading(true)
+
+      queryService.getInfo({ query: search }).then(info => {
+        const newList = songList.concat(info)
+        setSongList(newList)
+        setSearch('')
+        setSongLoading(false)
+      })
+    } else if (regexPlaylist.test(search)) {
+      setSongLoading(true)
+
+      queryService.getPlaylistInfo({ link: search }).then(res => {
+        const newList = songList.concat(res.info)
+        setSongList(newList)
+        setSearch('')
+        setSongLoading(false)
+      })
+    } else {
       alert('invalid link')
       return
     }
-
-    setSongLoading(true)
-
-    queryService.getInfo({ query: search }).then(info => {
-      const newList = songList.concat(info)
-      setSongList(newList)
-      setSearch('')
-      setSongLoading(false)
-    })
   }
 
   const handleCreate = (event) => {
@@ -111,7 +122,7 @@ const App = () => {
         </div>
         <div className='instructions'>
             <ol>
-              <li>paste youtube link and press add</li>
+              <li>paste youtube video or playlist link and press add</li>
               <li>edit song title and artist</li>
               <li>drag and drop to get order of songs</li>
               <li>choose video background image</li>
@@ -135,7 +146,7 @@ const App = () => {
         </div>
         <div className='instructions'>
             <ol>
-              <li>paste youtube link and press add</li>
+              <li>paste youtube video or playlist link and press add</li>
               <li>edit song title and artist</li>
               <li>drag and drop to get order of songs</li>
               <li>choose video background image</li>
@@ -161,7 +172,7 @@ const App = () => {
       </div>
       <div className='instructions'>
           <ol>
-            <li>paste youtube link and press add</li>
+            <li>paste youtube video or playlist link and press add</li>
             <li>edit song title and artist</li>
             <li>drag and drop to get order of songs</li>
             <li>choose video background image</li>

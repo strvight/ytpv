@@ -98,3 +98,27 @@ def getSongInfo(query):
     }
 
     return info
+
+
+def getPlaylistInfo(link):
+
+    playlistID = link[-34:]
+
+    response = requests.get(
+        f'https://youtube.googleapis.com/youtube/v3/playlistItems?part=snippet&playlistId={playlistID}&key={key}')
+
+    items = response.json()['items']
+
+    videoInfos = []
+
+    for item in items:
+        info = {
+            "title": item['snippet']['title'],
+            "artist": item['snippet']['channelTitle'],
+            "id": item['snippet']['resourceId']['videoId'],
+            "link": "https://youtu.be/" + item['snippet']['resourceId']['videoId'],
+            "thumbnail": item['snippet']['thumbnails']['default']['url']
+        }
+        videoInfos.append(info)
+
+    return videoInfos

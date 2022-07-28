@@ -1,7 +1,7 @@
 from flask import Flask, request, send_file
 from werkzeug.utils import secure_filename
 from main import *
-from getSong import getSongInfo
+from getSong import getSongInfo, getPlaylistInfo
 import shutil
 
 app = Flask(__name__, static_url_path='', static_folder='frontend/build')
@@ -56,6 +56,17 @@ def info():
         query = request.json['query']
         info = getSongInfo(query)
         return info
+
+
+@app.route('/api/get-playlist-info', methods=['POST'])
+def playlistInfo():
+    if request.method == 'POST':
+        link = request.json['link']
+        info = getPlaylistInfo(link)
+        response = {
+            "info": info
+        }
+        return response
 
 
 @app.route('/video/<uuid:fileID>')
