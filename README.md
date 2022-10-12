@@ -12,7 +12,7 @@ Technologies used:
 
 - Hosting: Azure, Docker
 
-Check it out for yourself: https://ytpv.azurewebsites.net/ (only works with short videos because of memory limitations on Azure)
+Check it out for yourself: ~~https://ytpv.azurewebsites.net/~~ link doesn't work anymore because I ran out of credits :(
 
 # How to use ytpv
 
