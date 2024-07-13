@@ -6,31 +6,27 @@ A web app that allows you to create and download your own playlist videos (e.g. 
 
 Technologies used:
 
-- Backend: Python, Flask, Moviepy, yt-dlp, Pillow, Youtube API
+- Backend: Firebase Functions, ffmpeg, yt-dlp, Youtube API
 
-- Frontend: JavaScript, React
+- Frontend: NextJS, TypeScript
 
-- Hosting: Azure, Docker
+- Hosting: Vercel
 
-Check it out for yourself: ~~https://ytpv.azurewebsites.net/~~ link doesn't work anymore because I ran out of credits :(
+Check it out for yourself: https://ytpv.vercel.app/
 
 # How to use ytpv
 
-1. paste youtube video or playlist links into search bar
-2. drap and drop cards to select order
-3. change title/artist names
-4. add video background image
-5. click create
-6. wait for video to be created and click download
+1. Search for songs using the search bar (searches yt for corresponding song)
+2. add video background image
+3. click create
+4. wait for video to be created and click download
 
-# How to install and run dev environment locally
+# Future
 
-1. clone project from github
-2. cd into frontend/playlist-maker-frontend
-3. run `npm install`
-4. run `npm start`
-5. cd into backend
-6. run `pip install -r requirements.txt`
-7. run `python app.py`
+Some things I want to add/working on (in no particular order):
 
-frontend will be running on localhost:3000 and backend will be on localhost:5000
+- drag and drop songs for ordering
+- changing song title and artist name on frontend
+- user auth to allow for videos to be saved to profile
+- progress bar
+- see if possible to optimize backend to use less memory
