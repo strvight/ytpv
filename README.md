@@ -14,6 +14,8 @@ Technologies used:
 
 Check it out for yourself: https://ytpv.vercel.app/
 
+Or scroll down for a [demo video](#demo)
+
 # How to use ytpv
 
 1. Search for songs using the search bar (searches yt for corresponding song)
@@ -30,3 +32,19 @@ Some things I want to add/working on (in no particular order):
 - user auth to allow for videos to be saved to profile
 - progress bar
 - see if possible to optimize backend to use less memory
+
+# Demo
+
+Website demo
+
+<video width="600" controls>
+  <source src="./videos/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
+
+Sample output
+
+<video width="600" controls>
+  <source src="./videos/output.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>
