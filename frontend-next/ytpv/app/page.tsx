@@ -132,7 +132,7 @@ export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-start px-24 py-12">
       <div className="z-10 w-full max-w-5xl font-sans text-sm mb-16">
-        <h1 className="text-2xl font-bold">ytpv</h1>
+        <h1 className="text-5xl font-bold">ytpv</h1>
       </div>
       {!loading && !videoUrl && (
         <>
