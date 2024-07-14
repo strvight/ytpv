@@ -44,14 +44,14 @@ function Search({ onAddResult }: SearchProps) {
   };
 
   return (
-    <div className="flex flex-col gap-5">
+    <div className="flex flex-col gap-2">
       <Input
         value={searchValue}
         placeholder="Search"
         onChange={(e) => handleSearch(e.target.value)}
       />
 
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-2">
         {searchResults.map((result) => (
           <SearchResult
             key={result.id.videoId}
