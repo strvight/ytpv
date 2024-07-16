@@ -89,7 +89,7 @@ export default function Home() {
 
     try {
       snapshot = await uploadImage(file);
-      console.log(snapshot);
+      // console.log(snapshot);
     } catch (error) {
       reload();
       console.error("Error uploading image:", error);
