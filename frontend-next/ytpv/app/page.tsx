@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Download } from "@/components/download";
 
-import { uploadImage, deleteImage } from "@/lib/firebase";
+import { uploadImage } from "@/lib/firebase";
 import axios from "axios";
 
 export default function Home() {
