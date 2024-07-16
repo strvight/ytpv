@@ -17,8 +17,6 @@ function Search({ onAddResult }: SearchProps) {
 
   const debouncedChangeHandler = useCallback(
     debounce((value) => {
-      // Execute your desired action here
-      console.log("Input value (debounced):", value);
       axios
         .get(`${process.env.NEXT_PUBLIC_BACKEND_URL}/ytQuery`, {
           params: {
@@ -26,15 +24,13 @@ function Search({ onAddResult }: SearchProps) {
           },
         })
         .then((res) => {
-          console.log("Search results:", res.data);
           setSearchResults(res.data);
         });
-    }, 300), // Adjust the debounce delay as needed
+    }, 300),
     []
   );
 
   const handleSearch = (s: string) => {
-    console.log("Input value:", s);
     setSearchValue(s);
     if (s !== "") {
       debouncedChangeHandler(s);
