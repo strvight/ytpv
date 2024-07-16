@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Download } from "@/components/download";
 
-import { uploadImage } from "@/lib/firebase";
+import { uploadImage, deleteImage } from "@/lib/firebase";
 import axios from "axios";
 
 export default function Home() {
@@ -30,6 +30,14 @@ export default function Home() {
   };
 
   const addSearchResult = (id: string, title: string) => {
+    if (videos.length >= 3) {
+      toast({
+        variant: "destructive",
+        description: "To save my money, you can only add up to 3 videos.",
+      });
+      return;
+    }
+
     setVideos([...videos, { id, title }]);
     toast({
       description: `Added ${title}`,
@@ -160,10 +168,15 @@ export default function Home() {
       {videoUrl === null && (
         <div className="z-10 w-full max-w-5xl font-sans">
           {loading ? (
-            <Button disabled>
-              <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
-              Creating Video
-            </Button>
+            <div>
+              <p className="mb-3">
+                Please be patient, it takes a while for the video to be created!
+              </p>
+              <Button disabled>
+                <ReloadIcon className="mr-2 h-4 w-4 animate-spin" />
+                Creating Video
+              </Button>
+            </div>
           ) : (
             <Button onClick={() => createVideo()}>
               <ChevronRightIcon className="mr-2 h-4 w-4" />
