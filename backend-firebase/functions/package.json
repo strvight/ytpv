@@ -14,10 +14,10 @@
   },
   "main": "index.js",
   "dependencies": {
-    "@distube/ytdl-core": "^4.13.5",
+    "@distube/ytdl-core": "^4.14.4",
     "axios": "^1.6.5",
     "firebase-admin": "^11.8.0",
-    "firebase-functions": "^4.3.1",
+    "firebase-functions": "^5.0.1",
     "fluent-ffmpeg": "^2.1.2",
     "ytdl-core": "^4.11.5"
   },
